@@ -9,16 +9,35 @@
 
   <div class="auth-container">
     <div class="logo">𝕏</div>
-    <h1 id="title">Sign in to x</h1>
 
-    <input type="email" id="email" placeholder="Email">
-    <input type="password" id="password" placeholder="Password">
+    <!-- LOGIN -->
+    <div id="loginBox">
+      <h1>Sign in to X</h1>
 
-    <button id="actionBtn" onclick="login()">Login</button>
+      <input type="email" id="loginEmail" placeholder="Email">
+      <input type="password" id="loginPassword" placeholder="Password">
 
-    <div class="switch">
-      <span id="switchText">Belum punya akun?</span>
-      <button class="link-btn" onclick="showRegister()">Daftar</button>
+      <button onclick="login()">Login</button>
+
+      <div class="switch">
+        Belum punya akun?
+        <span class="link-btn" onclick="showRegister()">Daftar</span>
+      </div>
+    </div>
+
+    <!-- REGISTER -->
+    <div id="registerBox" style="display:none">
+      <h1>Create your account</h1>
+
+      <input type="email" id="registerEmail" placeholder="Email">
+      <input type="password" id="registerPassword" placeholder="Password">
+
+      <button onclick="register()">Daftar</button>
+
+      <div class="switch">
+        Sudah punya akun?
+        <span class="link-btn" onclick="showLogin()">Login</span>
+      </div>
     </div>
 
     <div class="message" id="message"></div>
@@ -27,5 +46,6 @@
   <!-- SUPABASE -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="supabase.js"></script>
+
 </body>
 </html>
