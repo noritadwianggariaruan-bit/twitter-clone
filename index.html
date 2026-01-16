@@ -11,9 +11,32 @@
 <input id="email" type="email" placeholder="Email">
 <input id="password" type="password" placeholder="Password">
 
-<button onclick="register()">Register</button>
-<button onclick="login()">Login</button>
+<button id="registerBtn">Create account</button>
+<button id="loginBtn">Sign in</button>
 
 <script type="module" src="auth.js"></script>
+
+<!-- SUPABASE CDN -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!-- SCRIPT KITA -->
+<script src="supabase.js"></script>
+
+
+<div class="auth-container">
+  <div class="logo">𝕏</div>
+  <h1>Sign in to X</h1>
+
+  <input type="email" id="email" placeholder="Email">
+  <input type="password" id="password" placeholder="Password">
+
+  <button onclick="login()">Login</button>
+
+  <div class="switch">
+    Belum punya akun? <span onclick="register()">Daftar</span>
+  </div>
+
+  <div class="message" id="message"></div>
+</div>
 </body>
 </html>
