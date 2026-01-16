@@ -27,3 +27,9 @@ async function loadTweets() {
 }
 
 loadTweets();
+
+const { data: { session } } = await client.auth.getSession();
+
+if (!session) {
+  window.location.href = "index.html";
+}

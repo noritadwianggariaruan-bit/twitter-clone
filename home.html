@@ -1,33 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-  <title>Home</title>
+  <meta charset="UTF-8">
+  <title>Home - X Clone</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h2>Home</h2>
+  <h2>Home</h2>
 
-<textarea id="tweet" placeholder="Apa yang sedang terjadi?"></textarea>
-<button onclick="postTweet()">Tweet</button>
+  <textarea id="tweet" placeholder="Apa yang sedang terjadi?"></textarea>
+  <button onclick="postTweet()">Tweet</button>
 
-<div id="tweets"></div>
-
-<script type="module" src="tweet.js"></script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <title>Home</title>
-</head>
-<body>
-  <h1>Selamat datang di X Clone 🚀</h1>
   <button onclick="logout()">Logout</button>
 
+  <div id="tweets"></div>
+
+  <!-- SUPABASE -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="supabase.js"></script>
+
+  <!-- TWEET LOGIC -->
+  <script type="module" src="tweet.js"></script>
+
 </body>
 </html>
-

@@ -56,18 +56,19 @@ async function register() {
 // LOGIN
 // ===============================
 async function login() {
-  const email = document.getElementById("loginEmail").value.trim();
-  const password = document.getElementById("loginPassword").value.trim();
-  const message = document.getElementById("message");
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
 
-  const { error } = await client.auth.signInWithPassword({
+  const { data, error } = await client.auth.signInWithPassword({
     email,
-    password,
+    password
   });
 
-  message.innerText = error
-    ? error.message
-    : "Login berhasil 🎉";
+  if (error) {
+    message.innerText = error.message;
+  } else {
+    window.location.href = "home.html";
+  }
 }
 
 // ===============================
