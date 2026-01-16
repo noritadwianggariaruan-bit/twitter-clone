@@ -1,10 +1,9 @@
-// ===============================
-// SUPABASE SETUP
-// ===============================
+// 🔐 GANTI DENGAN DATA SUPABASE KAMU
 const SUPABASE_URL = "https://cjkfayemtiixlfxfcddp.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNqa2ZheWVtdGlpeGxmeGZjZGRwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg0NzAxODYsImV4cCI6MjA4NDA0NjE4Nn0.pcLZYsl1avZzz54f7G-TWS_z-zzm0UY1S21hFVjYYew";
 
-const supabase = supabase.createClient(
+// ✅ JANGAN pakai const supabase = supabase.createClient
+const client = window.supabase.createClient(
   SUPABASE_URL,
   SUPABASE_ANON_KEY
 );
@@ -22,16 +21,14 @@ async function register() {
     return;
   }
 
-  const { error } = await supabase.auth.signUp({
+  const { error } = await client.auth.signUp({
     email,
     password,
   });
 
-  if (error) {
-    message.innerText = error.message;
-  } else {
-    message.innerText = "Registrasi berhasil! Cek email kamu 📧";
-  }
+  message.innerText = error
+    ? error.message
+    : "Registrasi berhasil! Cek email kamu 📧";
 }
 
 // ===============================
@@ -42,7 +39,7 @@ async function login() {
   const password = document.getElementById("password").value;
   const message = document.getElementById("message");
 
-  const { error } = await supabase.auth.signInWithPassword({
+  const { error } = await client.auth.signInWithPassword({
     email,
     password,
   });
@@ -51,6 +48,5 @@ async function login() {
     message.innerText = error.message;
   } else {
     message.innerText = "Login berhasil 🎉";
-    // nanti kita redirect ke halaman tweet
   }
 }
