@@ -50,3 +50,84 @@ async function login() {
     message.innerText = "Login berhasil 🎉";
   }
 }
+
+// ===============================
+// SUPABASE CLIENT
+// ===============================
+const SUPABASE_URL = "https://PROJECT_ID_KAMU.supabase.co";
+const SUPABASE_ANON_KEY = "ANON_KEY_KAMU";
+
+const client = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_ANON_KEY
+);
+
+// ===============================
+// UI SWITCH
+// ===============================
+function showRegister() {
+  document.getElementById("title").innerText = "Create your account";
+  document.getElementById("actionBtn").innerText = "Daftar";
+  document.getElementById("actionBtn").onclick = register;
+
+  document.getElementById("switchText").innerText = "Sudah punya akun?";
+  document.querySelector(".link-btn").innerText = "Login";
+  document.querySelector(".link-btn").onclick = showLogin;
+
+  document.getElementById("message").innerText = "";
+}
+
+function showLogin() {
+  document.getElementById("title").innerText = "Sign in to X";
+  document.getElementById("actionBtn").innerText = "Login";
+  document.getElementById("actionBtn").onclick = login;
+
+  document.getElementById("switchText").innerText = "Belum punya akun?";
+  document.querySelector(".link-btn").innerText = "Daftar";
+  document.querySelector(".link-btn").onclick = showRegister;
+
+  document.getElementById("message").innerText = "";
+}
+
+// ===============================
+// REGISTER
+// ===============================
+async function register() {
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value.trim();
+  const message = document.getElementById("message");
+
+  if (!email || !password) {
+    message.innerText = "Email dan password wajib diisi";
+    return;
+  }
+
+  if (password.length < 6) {
+    message.innerText = "Password minimal 6 karakter";
+    return;
+  }
+
+  const { error } = await client.auth.signUp({ email, password });
+
+  message.innerText = error
+    ? error.message
+    : "Akun berhasil dibuat 🎉 Silakan login";
+}
+
+// ===============================
+// LOGIN
+// ===============================
+async function login() {
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value.trim();
+  const message = document.getElementById("message");
+
+  const { error } = await client.auth.signInWithPassword({
+    email,
+    password,
+  });
+
+  message.innerText = error
+    ? error.message
+    : "Login berhasil 🎉";
+}

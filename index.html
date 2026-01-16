@@ -9,24 +9,23 @@
 
   <div class="auth-container">
     <div class="logo">𝕏</div>
-    <h1>Sign in to X</h1>
+    <h1 id="title">Sign in to X</h1>
 
     <input type="email" id="email" placeholder="Email">
     <input type="password" id="password" placeholder="Password">
 
-    <button onclick="login()">Login</button>
+    <button id="actionBtn" onclick="login()">Login</button>
 
     <div class="switch">
-      Belum punya akun? <span onclick="register()">Daftar</span>
+      <span id="switchText">Belum punya akun?</span>
+      <button class="link-btn" onclick="showRegister()">Daftar</button>
     </div>
 
     <div class="message" id="message"></div>
   </div>
 
-  <!-- SUPABASE CDN (WAJIB DULUAN) -->
+  <!-- SUPABASE -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-  <!-- SCRIPT KITA -->
   <script src="supabase.js"></script>
 </body>
 </html>
