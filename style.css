@@ -229,3 +229,58 @@ body {
   font-size: 15px;
   line-height: 1.4;
 }
+
+/* ===== TWEET CARD ===== */
+.tweet-card {
+  display: flex;
+  gap: 12px;
+  padding: 15px;
+  border-bottom: 1px solid #2f3336;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+}
+
+.tweet-content {
+  flex: 1;
+}
+
+.tweet-header {
+  display: flex;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.username {
+  font-weight: bold;
+}
+
+.time {
+  color: #6e767d;
+}
+
+.tweet-text {
+  margin: 5px 0 10px;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.tweet-actions {
+  display: flex;
+  gap: 20px;
+  font-size: 16px;
+  color: #6e767d;
+  cursor: pointer;
+}
+
+.tweet-actions span:hover {
+  color: #1d9bf0;
+}

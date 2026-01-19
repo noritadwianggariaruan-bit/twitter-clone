@@ -19,12 +19,31 @@ async function loadTweets() {
     .order("created_at", { ascending: false });
 
   tweetsDiv.innerHTML = "";
+
   data.forEach(tweet => {
-    const p = document.createElement("p");
-    p.textContent = tweet.content;
-    tweetsDiv.appendChild(p);
+    const div = document.createElement("div");
+    div.className = "tweet-card";
+
+    div.innerHTML = `
+      <div class="avatar">👤</div>
+      <div class="tweet-content">
+        <div class="tweet-header">
+          <span class="username">@user</span>
+          <span class="time">${new Date(tweet.created_at).toLocaleString()}</span>
+        </div>
+        <div class="tweet-text">${tweet.content}</div>
+        <div class="tweet-actions">
+          <span>💬</span>
+          <span>❤️</span>
+          <span>🗑️</span>
+        </div>
+      </div>
+    `;
+
+    tweetsDiv.appendChild(div);
   });
 }
+
 
 // ===== AUTH GUARD =====
 async function checkAuth() {
