@@ -15,6 +15,7 @@
     <!-- LOGIN -->
     <div id="loginBox">
       <h2>Masuk</h2>
+
       <input id="loginEmail" type="email" placeholder="Email">
       <input id="loginPassword" type="password" placeholder="Password">
 
@@ -36,7 +37,7 @@
 
       <label class="avatar-label">
         Pilih avatar
-        <input type="file" id="avatar" accept="image/*" hidden>
+        <input type="file" id="avatar" hidden>
       </label>
 
       <button onclick="signup()">Daftar</button>
@@ -47,10 +48,10 @@
       </p>
     </div>
 
-    <p class="message" id="message"></p>
+    <p id="message" class="message"></p>
   </div>
 
-  <!-- SUPABASE -->
+  <!-- ⚠️ URUTAN WAJIB -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="supabase.js"></script>
 
