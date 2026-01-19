@@ -1,51 +1,32 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <title>Twitter Clone</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <title>Daftar - X Clone</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="auth-page">
 
-  <div class="auth-container">
-    <div class="logo">𝕏</div>
+  <div class="auth-box">
+    <h1>X</h1>
+    <h2>Buat akun</h2>
 
-    <!-- LOGIN -->
-    <div id="loginBox">
-      <h1>Sign in to X</h1>
+    <input type="text" id="username" placeholder="Username" />
+    <input type="email" id="email" placeholder="Email" />
+    <input type="password" id="password" placeholder="Password" />
 
-      <input type="email" id="loginEmail" placeholder="Email">
-      <input type="password" id="loginPassword" placeholder="Password">
+    <label class="avatar-label">
+      Pilih avatar
+      <input type="file" id="avatar" accept="image/*" hidden />
+    </label>
 
-      <button onclick="login()">Login</button>
+    <button onclick="signup()">Daftar</button>
 
-      <div class="switch">
-        Belum punya akun?
-        <span class="link-btn" onclick="showRegister()">Daftar</span>
-      </div>
-    </div>
-
-    <!-- REGISTER -->
-    <div id="registerBox" style="display:none">
-      <h1>Create your account</h1>
-
-      <input type="email" id="registerEmail" placeholder="Email">
-      <input type="password" id="registerPassword" placeholder="Password">
-
-      <button onclick="register()">Daftar</button>
-
-      <div class="switch">
-        Sudah punya akun?
-        <span class="link-btn" onclick="showLogin()">Login</span>
-      </div>
-    </div>
-
-    <div class="message" id="message"></div>
+    <p class="message" id="message"></p>
   </div>
 
-  <!-- SUPABASE -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="supabase.js"></script>
-
 </body>
 </html>
