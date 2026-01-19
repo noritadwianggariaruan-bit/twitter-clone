@@ -56,10 +56,16 @@ async function register() {
 // LOGIN
 // ===============================
 async function login() {
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
+  const email = document.getElementById("loginEmail").value.trim();
+  const password = document.getElementById("loginPassword").value.trim();
+  const message = document.getElementById("message");
 
-  const { data, error } = await client.auth.signInWithPassword({
+  if (!email || !password) {
+    message.innerText = "Email dan password wajib diisi";
+    return;
+  }
+
+  const { error } = await client.auth.signInWithPassword({
     email,
     password
   });
