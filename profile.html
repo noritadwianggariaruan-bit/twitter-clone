@@ -2,13 +2,41 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Profile</title>
+  <title>Profile - X Clone</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
-  <h1>Profile</h1>
-  <div id="profile"></div>
-  <div id="myTweets"></div>
+
+<body class="home-page">
+
+  <div class="layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="logo">𝕏</div>
+
+      <nav class="menu">
+        <a href="home.html">Home</a>
+        <a href="explore.html">Explore</a>
+        <a href="profile.html" class="active">Profile</a>
+      </nav>
+
+      <button class="logout-btn" onclick="logout()">Logout</button>
+    </aside>
+
+    <!-- PROFILE CONTENT -->
+    <main class="home-container">
+      <div class="profile-header">
+        <div class="profile-avatar" id="avatar">👤</div>
+        <h2 id="username">@username</h2>
+        <p id="email">email@email.com</p>
+      </div>
+
+      <h3>Tweet</h3>
+      <div id="myTweets"></div>
+    </main>
+
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="supabase.js"></script>
