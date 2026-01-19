@@ -10,16 +10,29 @@
 
   <h2>Home</h2>
 
-  <textarea
-    id="tweet"
-    placeholder="Apa yang sedang terjadi?"
-    rows="3"
-  ></textarea>
+  <body class="home-page">
 
-  <button onclick="postTweet()">Tweet</button>
-  <button onclick="logout()">Logout</button>
+  <div class="home-container">
+    <h2>Home</h2>
 
-  <div id="tweets"></div>
+    <textarea
+      id="tweet"
+      placeholder="Apa yang sedang terjadi?"
+      rows="3"
+    ></textarea>
+
+    <div class="actions">
+      <button onclick="postTweet()">Tweet</button>
+      <button onclick="logout()">Logout</button>
+    </div>
+
+    <div id="tweets"></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase.js"></script>
+  <script src="tweet.js"></script>
+</body>
 
   <!-- SUPABASE LIB -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
