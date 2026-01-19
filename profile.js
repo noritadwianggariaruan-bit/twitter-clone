@@ -1,6 +1,6 @@
-/* =========================
-   PROTEKSI HALAMAN
-========================= */
+// ===============================
+// CEK SESSION
+// ===============================
 (async () => {
   const { data } = await supabase.auth.getSession();
   if (!data.session) {
@@ -8,9 +8,9 @@
   }
 })();
 
-/* =========================
-   LOAD PROFILE
-========================= */
+// ===============================
+// LOAD PROFILE
+// ===============================
 async function loadProfile() {
   const {
     data: { user }
@@ -18,81 +18,53 @@ async function loadProfile() {
 
   if (!user) return;
 
-  // tampilkan email
-  document.getElementById("email").textContent = user.email;
-
-  // ambil profile
-  const { data: profile } = await supabase
+  const { data, error } = await supabase
     .from("profiles")
     .select("*")
     .eq("id", user.id)
     .single();
 
-  if (profile) {
-    document.getElementById("username").textContent =
-      "@" + profile.username;
-
-    if (profile.avatar_url) {
-      document.getElementById("avatar").innerHTML =
-        `<img src="${profile.avatar_url}" />`;
-    } else {
-      document.getElementById("avatar").textContent =
-        profile.username.charAt(0).toUpperCase();
-    }
+  if (error) {
+    console.error(error);
+    return;
   }
 
-  loadMyTweets(user.id);
-}
+  document.getElementById("profileUsername").textContent =
+    "@" + data.username;
 
-/* =========================
-   LOAD TWEET USER
-========================= */
-async function loadMyTweets(userId) {
-  const { data } = await supabase
-    .from("tweets")
-    .select("*")
-    .eq("user_id", userId)
-    .order("created_at", { ascending: false });
-
-  const container = document.getElementById("myTweets");
-  container.innerHTML = "";
-
-  data.forEach(tweet => {
-    const div = document.createElement("div");
-    div.className = "tweet-card";
-
-    div.innerHTML = `
-      <div class="tweet-content">
-        <div class="tweet-text">${tweet.content}</div>
-        <div class="time">
-          ${new Date(tweet.created_at).toLocaleString()}
-        </div>
-      </div>
-    `;
-
-    container.appendChild(div);
-  });
+  if (data.avatar_url) {
+    document.getElementById("profileAvatar").src = data.avatar_url;
+  }
 }
 
 loadProfile();
 
-/* =========================
-   UPDATE PROFILE
-========================= */
+// ===============================
+// UPDATE PROFILE (INI YANG PENTING)
+// ===============================
 window.updateProfile = async function () {
   const message = document.getElementById("profileMessage");
-  const newUsername = document.getElementById("editUsername").value.trim();
-  const avatarFile = document.getElementById("editAvatar").files[0];
+  message.textContent = "Menyimpan...";
+
+  const newUsername = document
+    .getElementById("editUsername")
+    .value.trim();
+
+  const avatarFile =
+    document.getElementById("editAvatar").files[0];
 
   const {
     data: { user }
   } = await supabase.auth.getUser();
 
-  if (!user) return;
+  if (!user) {
+    message.textContent = "User tidak ditemukan";
+    return;
+  }
 
   let avatarUrl = null;
 
-  // UPLOAD AVATAR BARU
+  // upload avatar
   if (avatarFile) {
     const filePath = `${user.id}/${Date.now()}_${avatarFile.name}`;
 
@@ -110,7 +82,6 @@ window.updateProfile = async function () {
       .getPublicUrl(filePath).data.publicUrl;
   }
 
-  // UPDATE PROFILE
   const updates = {};
   if (newUsername) updates.username = newUsername;
   if (avatarUrl) updates.avatar_url = avatarUrl;
@@ -128,6 +99,5 @@ window.updateProfile = async function () {
   message.style.color = "#1d9bf0";
   message.textContent = "Profil berhasil diperbarui";
 
-  // refresh profile
   loadProfile();
 };
