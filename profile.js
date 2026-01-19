@@ -75,3 +75,59 @@ async function loadMyTweets(userId) {
 }
 
 loadProfile();
+
+/* =========================
+   UPDATE PROFILE
+========================= */
+window.updateProfile = async function () {
+  const message = document.getElementById("profileMessage");
+  const newUsername = document.getElementById("editUsername").value.trim();
+  const avatarFile = document.getElementById("editAvatar").files[0];
+
+  const {
+    data: { user }
+  } = await supabase.auth.getUser();
+
+  if (!user) return;
+
+  let avatarUrl = null;
+
+  // UPLOAD AVATAR BARU
+  if (avatarFile) {
+    const filePath = `${user.id}/${Date.now()}_${avatarFile.name}`;
+
+    const { error: uploadError } = await supabase.storage
+      .from("avatars")
+      .upload(filePath, avatarFile, { upsert: true });
+
+    if (uploadError) {
+      message.textContent = uploadError.message;
+      return;
+    }
+
+    avatarUrl = supabase.storage
+      .from("avatars")
+      .getPublicUrl(filePath).data.publicUrl;
+  }
+
+  // UPDATE PROFILE
+  const updates = {};
+  if (newUsername) updates.username = newUsername;
+  if (avatarUrl) updates.avatar_url = avatarUrl;
+
+  const { error } = await supabase
+    .from("profiles")
+    .update(updates)
+    .eq("id", user.id);
+
+  if (error) {
+    message.textContent = error.message;
+    return;
+  }
+
+  message.style.color = "#1d9bf0";
+  message.textContent = "Profil berhasil diperbarui";
+
+  // refresh profile
+  loadProfile();
+};

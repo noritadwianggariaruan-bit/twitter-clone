@@ -37,6 +37,23 @@
     </main>
 
   </div>
+  <div class="edit-profile">
+  <h3>Edit Profile</h3>
+
+  <input
+    type="text"
+    id="editUsername"
+    placeholder="Username baru"
+  />
+
+  <label class="avatar-label">
+    Ganti Avatar
+    <input type="file" id="editAvatar" accept="image/*" hidden>
+  </label>
+
+  <button onclick="updateProfile()">Simpan Perubahan</button>
+  <p class="message" id="profileMessage"></p>
+</div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="supabase.js"></script>
