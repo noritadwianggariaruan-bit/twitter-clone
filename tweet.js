@@ -4,7 +4,7 @@ const tweetsDiv = document.getElementById("tweets");
    PROTEKSI HALAMAN
 ========================= */
 (async () => {
-  const { data, error } = await supabase.auth.getSession();
+  const { data, error } = await supabaseClient.auth.getSession();
 
   if (error || !data.session) {
     window.location.href = "index.html";
@@ -20,15 +20,15 @@ window.postTweet = async function () {
 
   const {
     data: { user }
-  } = await supabase.auth.getUser();
+  } = await supabaseClient.auth.getUser();
 
-  const { data: profile } = await supabase
+  const { data: profile } = await supabaseClient
     .from("profiles")
     .select("username")
     .eq("id", user.id)
     .single();
 
-  const { error } = await supabase.from("tweets").insert({
+  const { error } = await supabaseClient.from("tweets").insert({
     content,
     user_id: user.id,
     username: profile.username
@@ -47,7 +47,7 @@ window.postTweet = async function () {
    LOAD TWEETS
 ========================= */
 async function loadTweets() {
-  const { data, error } = await supabase
+  const { data, error } = await supabaseClient
     .from("tweets")
     .select("*")
     .order("created_at", { ascending: false });

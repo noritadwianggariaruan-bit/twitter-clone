@@ -2,7 +2,7 @@
 // CEK SESSION
 // ===============================
 (async () => {
-  const { data } = await supabase.auth.getSession();
+  const { data } = await supabaseClient.auth.getSession();
   if (!data.session) {
     window.location.href = "index.html";
   }
@@ -14,11 +14,11 @@
 async function loadProfile() {
   const {
     data: { user }
-  } = await supabase.auth.getUser();
+  } = await supabaseClient.auth.getUser();
 
   if (!user) return;
 
-  const { data, error } = await supabase
+  const { data, error } = await supabaseClient
     .from("profiles")
     .select("*")
     .eq("id", user.id)
@@ -42,62 +42,25 @@ loadProfile();
 // ===============================
 // UPDATE PROFILE (INI YANG PENTING)
 // ===============================
-window.updateProfile = async function () {
-  const message = document.getElementById("profileMessage");
-  message.textContent = "Menyimpan...";
+window.updateProfile = async () => {
+  const { data: { user }, error } = await supabaseClient.auth.getUser()
 
-  const newUsername = document
-    .getElementById("editUsername")
-    .value.trim();
-
-  const avatarFile =
-    document.getElementById("editAvatar").files[0];
-
-  const {
-    data: { user }
-  } = await supabase.auth.getUser();
-
-  if (!user) {
-    message.textContent = "User tidak ditemukan";
-    return;
+  if (error || !user) {
+    alert("User belum login")
+    return
   }
 
-  let avatarUrl = null;
+  const username = document.getElementById("username").value
 
-  // upload avatar
-  if (avatarFile) {
-    const filePath = `${user.id}/${Date.now()}_${avatarFile.name}`;
-
-    const { error: uploadError } = await supabase.storage
-      .from("avatars")
-      .upload(filePath, avatarFile, { upsert: true });
-
-    if (uploadError) {
-      message.textContent = uploadError.message;
-      return;
-    }
-
-    avatarUrl = supabase.storage
-      .from("avatars")
-      .getPublicUrl(filePath).data.publicUrl;
-  }
-
-  const updates = {};
-  if (newUsername) updates.username = newUsername;
-  if (avatarUrl) updates.avatar_url = avatarUrl;
-
-  const { error } = await supabase
+  const { error: updateError } = await supabaseClient
     .from("profiles")
-    .update(updates)
-    .eq("id", user.id);
+    .update({ username })
+    .eq("id", user.id)
 
-  if (error) {
-    message.textContent = error.message;
-    return;
+  if (updateError) {
+    alert("Gagal update profil")
+  } else {
+    alert("Profil berhasil diupdate")
   }
+}
 
-  message.style.color = "#1d9bf0";
-  message.textContent = "Profil berhasil diperbarui";
-
-  loadProfile();
-};
