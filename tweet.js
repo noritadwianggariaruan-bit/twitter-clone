@@ -1,10 +1,9 @@
-import { supabase } from "./supabase.js";
-
+const supabase = window.supabaseClient;
 const tweetsDiv = document.getElementById("tweets");
 
+// ===== POST TWEET =====
 window.postTweet = async function () {
-  const content = document.getElementById("tweet").value;
-
+  const content = document.getElementById("tweet").value.trim();
   if (!content) return;
 
   await supabase.from("tweets").insert([{ content }]);
@@ -12,6 +11,7 @@ window.postTweet = async function () {
   loadTweets();
 };
 
+// ===== LOAD TWEETS =====
 async function loadTweets() {
   const { data } = await supabase
     .from("tweets")
@@ -26,10 +26,13 @@ async function loadTweets() {
   });
 }
 
-loadTweets();
-
-const { data: { session } } = await client.auth.getSession();
-
-if (!session) {
-  window.location.href = "index.html";
+// ===== AUTH GUARD =====
+async function checkAuth() {
+  const { data: { session } } = await supabase.auth.getSession();
+  if (!session) {
+    window.location.href = "index.html";
+  }
 }
+
+checkAuth();
+loadTweets();
