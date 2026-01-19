@@ -1,22 +1,27 @@
-const supabase = window.supabaseClient;
 const tweetsDiv = document.getElementById("tweets");
 
-// ===== POST TWEET =====
 window.postTweet = async function () {
   const content = document.getElementById("tweet").value.trim();
   if (!content) return;
 
-  await supabase.from("tweets").insert([{ content }]);
+  await supabase.from("tweets").insert([
+    { content }
+  ]);
+
   document.getElementById("tweet").value = "";
   loadTweets();
 };
 
-// ===== LOAD TWEETS =====
 async function loadTweets() {
-  const { data } = await supabase
+  const { data, error } = await supabase
     .from("tweets")
     .select("*")
     .order("created_at", { ascending: false });
+
+  if (error) {
+    console.error(error);
+    return;
+  }
 
   tweetsDiv.innerHTML = "";
 
@@ -28,8 +33,10 @@ async function loadTweets() {
       <div class="avatar">👤</div>
       <div class="tweet-content">
         <div class="tweet-header">
-          <span class="username">@user</span>
-          <span class="time">${new Date(tweet.created_at).toLocaleString()}</span>
+          <span class="username">@anonymous</span>
+          <span class="time">
+            ${new Date(tweet.created_at).toLocaleString()}
+          </span>
         </div>
         <div class="tweet-text">${tweet.content}</div>
         <div class="tweet-actions">
@@ -44,14 +51,4 @@ async function loadTweets() {
   });
 }
 
-
-// ===== AUTH GUARD =====
-async function checkAuth() {
-  const { data: { session } } = await supabase.auth.getSession();
-  if (!session) {
-    window.location.href = "index.html";
-  }
-}
-
-checkAuth();
 loadTweets();
