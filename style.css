@@ -13,30 +13,96 @@ body {
   min-height: 100vh;
 }
 
-/* ===== HOME LAYOUT ===== */
+/* ===== LAYOUT ===== */
 .home-page {
   display: flex;
   justify-content: center;
 }
 
-/* MAIN CONTAINER */
-.home-container {
+.layout {
+  display: flex;
   width: 100%;
-  max-width: 600px; /* ukuran timeline Twitter */
+  max-width: 1200px;
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar {
+  width: 250px;
   padding: 20px;
-  border-left: 1px solid #2f3336;
+  border-right: 1px solid #2f3336;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.logo {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.menu a {
+  font-size: 18px;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 999px;
+}
+
+.menu a:hover {
+  background-color: #181818;
+}
+
+.menu .active {
+  font-weight: bold;
+}
+
+/* SIDEBAR BUTTON */
+.tweet-btn {
+  margin-top: 20px;
+  padding: 12px;
+  border-radius: 999px;
+  border: none;
+  background-color: #1d9bf0;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.tweet-btn:hover {
+  background-color: #1a8cd8;
+}
+
+.logout-btn {
+  margin-top: auto;
+  padding: 10px;
+  border-radius: 999px;
+  background: transparent;
+  border: 1px solid #1d9bf0;
+  color: #1d9bf0;
+  cursor: pointer;
+}
+
+/* ===== MAIN CONTENT ===== */
+.home-container {
+  flex: 1;
+  max-width: 600px;
+  padding: 20px;
   border-right: 1px solid #2f3336;
   min-height: 100vh;
 }
 
-/* TITLE */
 .home-title {
   font-size: 20px;
   font-weight: bold;
   margin-bottom: 15px;
 }
 
-/* TEXTAREA (TWEET BOX) */
+/* TWEET BOX */
 #tweet {
   width: 100%;
   background-color: #000;
@@ -53,46 +119,30 @@ body {
   color: #6e767d;
 }
 
-/* ACTION BUTTONS */
+/* ACTIONS */
 .actions {
   display: flex;
-  justify-content: space-between;
-  margin: 12px 0 20px;
+  justify-content: flex-end;
+  margin: 10px 0 20px;
 }
 
 .actions button {
   padding: 8px 18px;
   border-radius: 999px;
   border: none;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-/* TWEET BUTTON */
-.actions button:first-child {
   background-color: #1d9bf0;
   color: #fff;
+  font-weight: bold;
+  cursor: pointer;
 }
 
-.actions button:first-child:hover {
-  background-color: #1a8cd8;
-}
-
-/* LOGOUT BUTTON */
-.actions button:last-child {
-  background-color: transparent;
-  color: #1d9bf0;
-  border: 1px solid #1d9bf0;
-}
-
-/* ===== TWEET LIST ===== */
+/* TWEETS */
 #tweets {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
-/* SINGLE TWEET CARD */
 #tweets p {
   padding: 12px;
   border-bottom: 1px solid #2f3336;

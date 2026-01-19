@@ -4,38 +4,50 @@
   <meta charset="UTF-8">
   <title>Home - X Clone</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- CSS -->
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body class="home-page">
 
-  <div class="home-container">
+  <!-- LAYOUT -->
+  <div class="layout">
 
-    <h2 class="home-title">Home</h2>
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="logo">𝕏</div>
 
-    <textarea
-      id="tweet"
-      placeholder="Apa yang sedang terjadi?"
-      rows="3"
-    ></textarea>
+      <nav class="menu">
+        <a class="active">Home</a>
+        <a>Explore</a>
+        <a>Profile</a>
+      </nav>
 
-    <div class="actions">
-      <button onclick="postTweet()">Tweet</button>
-      <button onclick="logout()">Logout</button>
-    </div>
+      <button class="tweet-btn">Tweet</button>
+      <button class="logout-btn" onclick="logout()">Logout</button>
+    </aside>
 
-    <div id="tweets"></div>
+    <!-- MAIN CONTENT -->
+    <main class="home-container">
+      <h2 class="home-title">Home</h2>
+
+      <textarea
+        id="tweet"
+        placeholder="Apa yang sedang terjadi?"
+        rows="3"
+      ></textarea>
+
+      <div class="actions">
+        <button onclick="postTweet()">Tweet</button>
+      </div>
+
+      <div id="tweets"></div>
+    </main>
 
   </div>
 
-  <!-- SUPABASE LIB -->
+  <!-- SCRIPTS -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-  <!-- SUPABASE CONFIG -->
   <script src="supabase.js"></script>
-
-  <!-- TWEET LOGIC -->
   <script src="tweet.js"></script>
 
 </body>
