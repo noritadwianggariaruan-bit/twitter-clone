@@ -12,21 +12,22 @@
     <h1>X</h1>
     <h2>Buat akun</h2>
 
-    <input type="text" id="username" placeholder="Username" />
-    <input type="email" id="email" placeholder="Email" />
-    <input type="password" id="password" placeholder="Password" />
+    <input id="username" placeholder="Username">
+    <input id="email" type="email" placeholder="Email">
+    <input id="password" type="password" placeholder="Password">
 
     <label class="avatar-label">
       Pilih avatar
-      <input type="file" id="avatar" accept="image/*" hidden />
+      <input type="file" id="avatar" accept="image/*" hidden>
     </label>
 
     <button onclick="signup()">Daftar</button>
-
     <p class="message" id="message"></p>
   </div>
 
+  <!-- WAJIB -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="supabase.js"></script>
+
 </body>
 </html>
