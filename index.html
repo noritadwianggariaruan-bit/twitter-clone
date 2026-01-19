@@ -2,30 +2,55 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Daftar - X Clone</title>
+  <title>X Clone</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body class="auth-page">
 
   <div class="auth-box">
-    <h1>X</h1>
-    <h2>Buat akun</h2>
+    <h1 class="logo">X</h1>
 
-    <input id="username" placeholder="Username">
-    <input id="email" type="email" placeholder="Email">
-    <input id="password" type="password" placeholder="Password">
+    <!-- LOGIN -->
+    <div id="loginBox">
+      <h2>Masuk</h2>
+      <input id="loginEmail" type="email" placeholder="Email">
+      <input id="loginPassword" type="password" placeholder="Password">
 
-    <label class="avatar-label">
-      Pilih avatar
-      <input type="file" id="avatar" accept="image/*" hidden>
-    </label>
+      <button onclick="login()">Login</button>
 
-    <button onclick="signup()">Daftar</button>
+      <p class="switch">
+        Belum punya akun?
+        <span onclick="showRegister()">Daftar</span>
+      </p>
+    </div>
+
+    <!-- REGISTER -->
+    <div id="registerBox" style="display:none">
+      <h2>Buat akun</h2>
+
+      <input id="username" placeholder="Username">
+      <input id="email" type="email" placeholder="Email">
+      <input id="password" type="password" placeholder="Password">
+
+      <label class="avatar-label">
+        Pilih avatar
+        <input type="file" id="avatar" accept="image/*" hidden>
+      </label>
+
+      <button onclick="signup()">Daftar</button>
+
+      <p class="switch">
+        Sudah punya akun?
+        <span onclick="showLogin()">Login</span>
+      </p>
+    </div>
+
     <p class="message" id="message"></p>
   </div>
 
-  <!-- WAJIB -->
+  <!-- SUPABASE -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="supabase.js"></script>
 

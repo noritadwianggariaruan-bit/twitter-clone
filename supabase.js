@@ -6,7 +6,20 @@ const supabaseClient = supabase.createClient(
   SUPABASE_KEY
 );
 
-// ⬇️ WAJIB GLOBAL
+/* ================= UI ================= */
+window.showRegister = function () {
+  document.getElementById("loginBox").style.display = "none";
+  document.getElementById("registerBox").style.display = "block";
+  document.getElementById("message").textContent = "";
+};
+
+window.showLogin = function () {
+  document.getElementById("registerBox").style.display = "none";
+  document.getElementById("loginBox").style.display = "block";
+  document.getElementById("message").textContent = "";
+};
+
+/* ================= SIGNUP ================= */
 window.signup = async function () {
   const username = document.getElementById("username").value.trim();
   const email = document.getElementById("email").value.trim();
@@ -19,7 +32,6 @@ window.signup = async function () {
     return;
   }
 
-  // AUTH SIGNUP
   const { data, error } = await supabaseClient.auth.signUp({
     email,
     password
@@ -33,7 +45,6 @@ window.signup = async function () {
   const user = data.user;
   let avatarUrl = null;
 
-  // UPLOAD AVATAR
   if (avatar) {
     const path = `${user.id}/${avatar.name}`;
 
@@ -49,12 +60,29 @@ window.signup = async function () {
     }
   }
 
-  // INSERT PROFILE
   await supabaseClient.from("profiles").insert({
     id: user.id,
-    username: username,
+    username,
     avatar_url: avatarUrl
   });
 
   window.location.href = "home.html";
+};
+
+/* ================= LOGIN ================= */
+window.login = async function () {
+  const email = document.getElementById("loginEmail").value;
+  const password = document.getElementById("loginPassword").value;
+  const message = document.getElementById("message");
+
+  const { error } = await supabaseClient.auth.signInWithPassword({
+    email,
+    password
+  });
+
+  if (error) {
+    message.textContent = error.message;
+  } else {
+    window.location.href = "home.html";
+  }
 };
