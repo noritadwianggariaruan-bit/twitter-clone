@@ -16,15 +16,13 @@
     <div id="loginBox">
       <h2>Masuk</h2>
 
-      <input id="loginEmail" />
-      <input id="loginPassword" />
+      <input id="loginEmail" placeholder="Email" />
+      <input id="loginPassword" type="password" placeholder="Password" />
       <button id="loginBtn">Login</button>
-
-    <script type="module" src="auth.js"></script>
 
       <p class="switch">
         Belum punya akun?
-        <span onclick="showRegister()">Daftar</span>
+        <span id="toRegister">Daftar</span>
       </p>
     </div>
 
@@ -41,20 +39,19 @@
         <input type="file" id="avatar" hidden>
       </label>
 
-      <button onclick="signup()">Daftar</button>
+      <button id="registerBtn">Daftar</button>
 
       <p class="switch">
         Sudah punya akun?
-        <span onclick="showLogin()">Login</span>
+        <span id="toLogin">Login</span>
       </p>
     </div>
 
     <p id="message" class="message"></p>
   </div>
 
-  <!-- ⚠️ URUTAN WAJIB -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="supabase.js"></script>
+  <!-- ✅ SATU-SATUNYA SCRIPT -->
+  <script type="module" src="auth.js"></script>
 
 </body>
 </html>
