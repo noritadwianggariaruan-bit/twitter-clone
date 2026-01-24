@@ -19,3 +19,19 @@ document.getElementById("loginBtn").addEventListener("click", async () => {
   if (error) alert(error.message);
   else window.location.href = "home.html";
 });
+
+async function resetPassword() {
+  const email = document.getElementById('email').value
+
+  const { error } = await supabase.auth.resetPasswordForEmail(email, {
+    redirectTo: 'http://localhost:5500/reset-password.html'
+  })
+
+  if (error) {
+    alert(error.message)
+  } else {
+    alert('Cek email kamu untuk reset password 💌')
+  }
+}
+
+window.resetPassword = resetPassword
